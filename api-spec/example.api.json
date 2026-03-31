@@ -1,0 +1,146 @@
+{
+  "module": "example",
+  "basePath": "/api/v1",
+  "description": "示例模块 - CRUD 操作演示",
+  "apis": [
+    {
+      "name": "list",
+      "method": "GET",
+      "path": "/example",
+      "description": "获取示例列表",
+      "query": {
+        "page": {
+          "type": "number",
+          "required": false,
+          "description": "页码",
+          "default": 1,
+          "min": 1
+        },
+        "pageSize": {
+          "type": "number",
+          "required": false,
+          "description": "每页数量",
+          "default": 10,
+          "min": 1,
+          "max": 100
+        },
+        "keyword": {
+          "type": "string",
+          "required": false,
+          "description": "搜索关键词",
+          "maxLength": 50
+        }
+      },
+      "response": {
+        "total": { "type": "number" },
+        "page": { "type": "number" },
+        "pageSize": { "type": "number" }
+      },
+      "auth": false
+    },
+    {
+      "name": "getById",
+      "method": "GET",
+      "path": "/example/:id",
+      "description": "根据ID获取示例详情",
+      "params": {
+        "id": {
+          "type": "number",
+          "required": true,
+          "description": "示例ID",
+          "min": 1
+        }
+      },
+      "response": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "description": { "type": "string", "required": false },
+        "createdAt": { "type": "string", "format": "datetime" },
+        "updatedAt": { "type": "string", "format": "datetime" }
+      },
+      "auth": false
+    },
+    {
+      "name": "create",
+      "method": "POST",
+      "path": "/example",
+      "description": "创建示例",
+      "body": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "名称",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "描述",
+          "maxLength": 500
+        }
+      },
+      "response": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "description": { "type": "string", "required": false },
+        "createdAt": { "type": "string", "format": "datetime" }
+      },
+      "auth": true
+    },
+    {
+      "name": "update",
+      "method": "PUT",
+      "path": "/example/:id",
+      "description": "更新示例",
+      "params": {
+        "id": {
+          "type": "number",
+          "required": true,
+          "description": "示例ID",
+          "min": 1
+        }
+      },
+      "body": {
+        "name": {
+          "type": "string",
+          "required": false,
+          "description": "名称",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "描述",
+          "maxLength": 500
+        }
+      },
+      "response": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "description": { "type": "string", "required": false },
+        "updatedAt": { "type": "string", "format": "datetime" }
+      },
+      "auth": true
+    },
+    {
+      "name": "delete",
+      "method": "DELETE",
+      "path": "/example/:id",
+      "description": "删除示例",
+      "params": {
+        "id": {
+          "type": "number",
+          "required": true,
+          "description": "示例ID",
+          "min": 1
+        }
+      },
+      "response": {
+        "success": { "type": "boolean" }
+      },
+      "auth": true
+    }
+  ]
+}
